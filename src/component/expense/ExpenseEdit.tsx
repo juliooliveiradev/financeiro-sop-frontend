@@ -30,8 +30,8 @@ export default function ExpenseDetailPage({ protocolo }: ExpenseEditProps) {
       credor: data.credor,
       descricao: data.descricao,
       valor: String(data.valor ?? data.valorFormatado?.replace(/[^\d,.-]+/g, '').replace(',', '.')),
-      dataProtocolo: data.dataProtocolo, // deve estar em formato ISO
-      dataVencimento: data.dataVencimento, // idem
+      dataProtocolo: data.dataProtocolo, 
+      dataVencimento: data.dataVencimento, 
     });
   } catch (error) {
     console.error('Erro ao buscar despesa:', error);
@@ -73,10 +73,10 @@ export default function ExpenseDetailPage({ protocolo }: ExpenseEditProps) {
   if (!expense) return <div className="p-4">Carregando...</div>
 
   return (
-    <div className="bg-white p-6 rounded shadow max-w-2xl mx-auto mt-6">
+    <div className="bg-black p-6 rounded shadow max-w-2xl mx-auto mt-6">
       <h2 className="text-xl font-bold mb-4">Detalhes da Despesa</h2>
       <div className="grid grid-cols-2 gap-4">
-        <input name="protocolo" value={expense.protocolo} disabled className="border p-2 bg-gray-100" />
+        <input name="protocolo" value={expense.protocolo} disabled className="border p-2 bg-gray-700" />
         <select name="tipo" value={expense.tipo} disabled={!isEditing} onChange={handleChange} className="border p-2">
           <option>Obra de Edificação</option>
           <option>Obra de Rodovias</option>

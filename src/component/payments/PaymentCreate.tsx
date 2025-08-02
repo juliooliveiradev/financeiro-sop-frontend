@@ -25,7 +25,7 @@ export default function PaymentCreate({ empenhoId, onSuccess }: PaymentCreatePro
         data: paymentDate,
         valor: parseFloat(value),
         observacao: observation,
-        empenhoId: empenhoId, // já está correto aqui
+        empenhoId: empenhoId, 
       })
     ).unwrap()
 
@@ -34,19 +34,19 @@ export default function PaymentCreate({ empenhoId, onSuccess }: PaymentCreatePro
     setObservation('')
     onSuccess()
   } catch {
-      // erro tratado no slice
+      
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4 p-4 border rounded bg-gray-50">
+    <form onSubmit={handleSubmit} className="mb-4 p-4 border rounded bg-black">
       <div className="mb-2">
         <label className="block font-semibold mb-1">Número do Empenho</label>
         <input
           type="text"
           value={empenhoId}
           disabled
-          className="w-full border p-2 rounded bg-gray-200 cursor-not-allowed"
+          className="w-full border p-2 rounded bg-gray-500 cursor-not-allowed"
         />
       </div>
 

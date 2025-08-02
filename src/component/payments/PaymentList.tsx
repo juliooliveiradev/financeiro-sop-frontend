@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { fetchPaymentsByCommitment } from '@/store/payments/paymentsSlice'
-import PaymentCreate from './PaymentCreate' // ajuste o caminho se necessário
+import PaymentCreate from './PaymentCreate' 
 
 interface PaymentListProps {
   empenhoId: string
@@ -24,7 +24,7 @@ export default function PaymentList({ empenhoId }: PaymentListProps) {
 
   return (
     <div className="mt-6 p-4 border rounded-md shadow bg-white">
-      <h2 className="text-xl font-bold mb-4 flex justify-between items-center">
+      <h2 className="text-xl font-bold mb-4 flex justify-between items-center bg-black">
         Pagamentos Registrados
         <button
           onClick={handleOpenForm}
@@ -45,7 +45,7 @@ export default function PaymentList({ empenhoId }: PaymentListProps) {
       ) : payments.length === 0 ? (
         <p>Nenhum pagamento registrado ainda.</p>
       ) : (
-        <table className="w-full text-left border-collapse">
+        <table className="w-full text-left border-collapse bg-black">
           <thead>
             <tr>
               <th className="border-b p-2">Número</th>

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import api from '@/services/api';
 
-// Interface alinhada com o backend
+
 export interface Expense {
   protocolo: string;
   tipo: 'Obra de Edificação' | 'Obra de Rodovias' | 'Outros';
@@ -35,13 +35,13 @@ export interface ExpenseInput {
   valor: string;
 }
 
-// Buscar todas as despesas
+
 export const fetchExpenses = createAsyncThunk('expenses/fetchAll', async () => {
   const response = await api.get<Expense[]>('/despesas');
   return response.data;
 });
 
-// Criar uma nova despesa
+
 export const createExpense = createAsyncThunk(
   'expenses/create',
   async (newExpense: ExpenseInput, { rejectWithValue }) => {
@@ -54,7 +54,7 @@ export const createExpense = createAsyncThunk(
   }
 );
 
-// Deletar despesa por protocolo
+
 export const deleteExpense = createAsyncThunk(
   'expenses/delete',
   async (protocolo: string, { rejectWithValue }) => {
@@ -67,7 +67,7 @@ export const deleteExpense = createAsyncThunk(
   }
 );
 
-// (Opcional) Buscar despesa por protocolo
+
 export const fetchExpenseById = createAsyncThunk(
   'expenses/fetchById',
   async (protocolo: string, { rejectWithValue }) => {
@@ -77,7 +77,7 @@ export const fetchExpenseById = createAsyncThunk(
       });
 
       if (!response.data.length) throw new Error('Despesa não encontrada');
-      return response.data[0]; // assume que o backend retorna uma lista
+      return response.data[0]; 
     } catch (error: any) {
       return rejectWithValue(error.response?.data || 'Erro ao buscar despesa');
     }

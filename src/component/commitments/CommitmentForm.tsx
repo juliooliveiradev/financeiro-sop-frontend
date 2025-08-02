@@ -17,7 +17,6 @@ export default function CommitmentForm({ despesaId, onSuccess }: CommitmentFormP
   const [descricao, setDescricao] = useState('')
   const [dataEmpenho, setDataEmpenho] = useState('')
 
-  // Salvar quantidade anterior de empenhos para detectar adição
   const prevLength = useRef(commitments.length)
 
   useEffect(() => {
@@ -44,14 +43,14 @@ export default function CommitmentForm({ despesaId, onSuccess }: CommitmentFormP
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-md shadow-md bg-white">
+    <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-md shadow-md bg-black">
       <div>
         <label className="block mb-1 font-medium">Despesa (ID)</label>
         <input
           type="text"
           value={despesaId}
           disabled
-          className="w-full border p-2 rounded bg-gray-100"
+          className="w-full border p-2 rounded bg-gray-500"
         />
       </div>
 

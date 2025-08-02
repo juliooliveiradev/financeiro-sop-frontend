@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import api from '@/services/api'
 
-// DTO usado ao criar um novo pagamento
+
 export interface PaymentCreateDTO {
   data: string
   valor: number
@@ -9,7 +9,7 @@ export interface PaymentCreateDTO {
   empenhoId: string
 }
 
-// Pagamento retornado da API (com valores formatados para exibição)
+
 export interface Payment {
   numero: string
   dataPagamentoFormatado: string
@@ -30,7 +30,7 @@ const initialState: PaymentsState = {
   error: null,
 }
 
-// Criar novo pagamento
+
 export const createPayment = createAsyncThunk(
   'payments/createPayment',
   async (newPaymentData: PaymentCreateDTO, { rejectWithValue }) => {
@@ -43,7 +43,7 @@ export const createPayment = createAsyncThunk(
   }
 )
 
-// Buscar pagamentos por empenho
+
 export const fetchPaymentsByCommitment = createAsyncThunk(
   'payments/fetchByCommitment',
   async (commitmentId: string, { rejectWithValue }) => {

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import api from '@/services/api'
 
-/** Interface para exibição dos empenhos (vinda do backend via GET) */
+
 export interface Commitment {
   numero: string
   dataEmpenhoFormatado: string
@@ -11,11 +11,11 @@ export interface Commitment {
   despesaId: string
 }
 
-/** Interface para criação de empenho (envio para backend via POST) */
+
 export interface CommitmentInput {
   valor: number
   descricao: string
-  dataEmpenho: string // raw ISO date (ex: "2025-08-01")
+  dataEmpenho: string 
   despesaId: string
 }
 
@@ -31,7 +31,7 @@ const initialState: CommitmentsState = {
   error: null,
 }
 
-// Buscar empenhos por despesa (protocolo)
+
 export const fetchCommitmentsByExpense = createAsyncThunk<
   Commitment[],
   string,
@@ -48,7 +48,7 @@ export const fetchCommitmentsByExpense = createAsyncThunk<
   }
 )
 
-// Criar novo empenho
+
 export const createCommitment = createAsyncThunk<
   Commitment,
   CommitmentInput,
@@ -65,7 +65,7 @@ export const createCommitment = createAsyncThunk<
   }
 )
 
-// Deletar empenho
+
 export const deleteCommitment = createAsyncThunk<
   string,
   string,

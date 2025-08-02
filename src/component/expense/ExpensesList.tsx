@@ -38,9 +38,9 @@ const ExpensesList = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Lista de Despesas</h1>
+      <h1 className="text-2xl font-bold mb-4 text-black">Lista de Despesas</h1>
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
+        <table className="min-w-full bg-black border border-gray-700">
           <thead>
             <tr>
               <th className="py-2 px-4 border-b">Protocolo</th>
@@ -52,7 +52,7 @@ const ExpensesList = () => {
           </thead>
           <tbody>
             {expenses.map((expense: Expense) => (
-              <tr key={expense.protocolo} className="hover:bg-gray-50">
+              <tr key={expense.protocolo} className="hover:bg-black-50">
                 <td className="py-2 px-4 border-b text-sm sm:text-base">{expense.protocolo}</td>
                 <td className="py-2 px-4 border-b text-sm sm:text-base">{expense.credor}</td>
                 <td className="py-2 px-4 border-b text-sm sm:text-base">R$ {expense.valorFormatado}</td>

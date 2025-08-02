@@ -47,7 +47,7 @@ export default function NewExpensePage() {
   };
 
   return (
-    <main className="max-w-xl mx-auto p-4 bg-white rounded shadow mt-4">
+    <main className="max-w-xl mx-auto p-4 bg-black rounded shadow mt-4">
       <h2 className="text-xl font-bold mb-4">Cadastrar Nova Despesa</h2>
       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
         <select name="tipo" value={form.tipo} onChange={handleChange} className="border p-2" required>
