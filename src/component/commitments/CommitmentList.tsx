@@ -35,6 +35,37 @@ export default function CommitmentList({ expenseId }: Props) {
 
   const toggleForm = () => setShowForm((prev) => !prev)
 
+  const handleGenerateCommitmentReport = async () => {
+    if (filtered.length === 0) return
+
+    const protocolo = filtered[0].despesaId // supondo que todos os empenhos da despesa compartilham o mesmo protocolo
+    const token = localStorage.getItem('token')
+
+    try {
+      const response = await fetch(`http://localhost:8080/api/relatorios/empenhos?protocolo=${encodeURIComponent(protocolo)}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error('Erro ao gerar relatório')
+      }
+
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `relatorio-empenhos-${protocolo}.pdf`)
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+    } catch (err) {
+      console.error(err)
+      alert('Erro ao gerar relatório de empenhos.')
+    }
+  }
+
   if (loading) return <p>Carregando empenhos...</p>
   if (error) return <p className="text-red-500">Erro: {error}</p>
 
@@ -42,25 +73,34 @@ export default function CommitmentList({ expenseId }: Props) {
     <div className="mt-4 space-y-4">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-bold">Empenhos</h3>
-        <button
-          onClick={toggleForm}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          {showForm ? 'Cancelar' : 'Criar Empenho'}
-        </button>
+        <div className="space-x-2">
+          <button
+            onClick={toggleForm}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            {showForm ? 'Cancelar' : 'Criar Empenho'}
+          </button>
+
+          {filtered.length > 0 && (
+            <button
+              onClick={handleGenerateCommitmentReport}
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            >
+              Gerar Relatório PDF
+            </button>
+          )}
+        </div>
       </div>
 
-      
       {showForm && (
         <CommitmentForm
           despesaId={expenseId}
           onSuccess={() => {
             setShowForm(false)
-            setExpandedCommitment(null) 
+            setExpandedCommitment(null)
           }}
         />
       )}
-
 
       {filtered.length === 0 ? (
         <p>Nenhum empenho registrado.</p>
@@ -68,7 +108,6 @@ export default function CommitmentList({ expenseId }: Props) {
         <ul className="divide-y">
           {filtered.map((commitment: Commitment) => (
             <li key={commitment.numero} className="py-2">
-
               <div
                 onClick={() => toggleExpand(commitment.numero)}
                 className="cursor-pointer hover:bg-blue-500 p-2 rounded transition"
@@ -87,7 +126,6 @@ export default function CommitmentList({ expenseId }: Props) {
                   Excluir
                 </button>
               </div>
-
 
               {expandedCommitment === commitment.numero && (
                 <div className="mt-2 ml-4">

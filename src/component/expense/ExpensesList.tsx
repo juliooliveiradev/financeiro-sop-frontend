@@ -34,11 +34,42 @@ const ExpensesList = () => {
     }
   }
 
+  const handleGenerateReport = async () => {
+  const token = localStorage.getItem('token') // ou onde você armazena o JWT
+
+  const response = await fetch('http://localhost:8080/api/relatorios/despesas', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+
+  const blob = await response.blob()
+  const url = window.URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.setAttribute('download', 'relatorio-despesas.pdf')
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+}
+
   if (loading) return <div className="text-center p-4">Carregando...</div>
   if (error) return <div className="text-center p-4 text-red-500">Erro: {error}</div>
 
   return (
     <div className="overflow-x-auto">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold">Despesas</h2>
+          <a
+          
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+            onClick={handleGenerateReport}
+          >
+        Gerar Relatório PDF
+        </a>
+      </div>
       <table className="min-w-full bg-black border border-gray-700">
         <thead>
           <tr>
